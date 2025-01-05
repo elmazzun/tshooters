@@ -1,6 +1,6 @@
 # Troubleshooters
 
-Statically compiled troubleshooting tools for Linux systems.
+**Statically compiled troubleshooting tools for Linux systems.**
 
 If you need to troubleshoot a Linux machine but you don't want to bring 
 troubleshooting tools in such machine by Docker or because your machine is 
@@ -16,6 +16,11 @@ I'd copy required tools by `scp` or similar in the machine but such tools
 should be compatible with machine system libraries: that's why, in different 
 Docker containers, I compile troubleshooting tools in a compatible way for 
 target machine.
+
+I tried to add `vmstat` in BusyBox as a starting point but lot of effort was 
+required in order to add only that tool: in the end, I decided to statically 
+compile the required tools in a containerized environment; the resulting binaries 
+are more chonky but at least they have everything they need inside them.
 
 ## Environments
 
