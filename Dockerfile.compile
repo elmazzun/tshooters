@@ -1,0 +1,44 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+
+ARG PROCPS="v4.0.5"
+ARG SYSSTAT="12.7.6"
+
+RUN mkdir -p /binaries
+
+# procps: sysctl, vmstat
+WORKDIR /opt
+
+RUN wget -O procps-${PROCPS}.tar.gz https://gitlab.com/procps-ng/procps/-/archive/${PROCPS}/procps-${PROCPS}.tar.gz && \
+    tar -xvzf procps-${PROCPS}.tar.gz && \
+    rm procps-${PROCPS}.tar.gz
+
+WORKDIR /opt/procps-${PROCPS}
+
+RUN ./autogen.sh \
+    && ./configure --enable-static --disable-nls --without-ncurses --disable-shared \
+    && make -j LDFLAGS=-all-static
+
+RUN cp /opt/procps-${PROCPS}/src/sysctl /binaries
+RUN cp /opt/procps-${PROCPS}/src/vmstat /binaries
+
+# sysstat: iostat, mpstat, pidstat, sar
+WORKDIR /opt
+
+RUN wget -O sysstat-v${SYSSTAT}.zip https://github.com/sysstat/sysstat/archive/refs/tags/v${SYSSTAT}.zip && \
+    unzip sysstat-v${SYSSTAT}.zip && \
+    rm sysstat-v${SYSSTAT}.zip
+
+WORKDIR /opt/sysstat-${SYSSTAT}
+
+RUN ./configure --disable-nls LDFLAGS=--static \
+    && make -j
+
+RUN cp /opt/sysstat-${SYSSTAT}/iostat  /binaries
+RUN cp /opt/sysstat-${SYSSTAT}/mpstat  /binaries
+RUN cp /opt/sysstat-${SYSSTAT}/pidstat /binaries
+RUN cp /opt/sysstat-${SYSSTAT}/sar     /binaries
+
+WORKDIR /binaries
+
+CMD ["sleep", "infinity"]
