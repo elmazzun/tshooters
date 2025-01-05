@@ -73,6 +73,7 @@ procs -----------memory---------- ---swap-- -----io---- -system-- -------cpu----
 
 ## TODO
 
+- [ ] `Dockerfile.compile` has way too many layers: reduce them
 - [ ] compile for more Linux distros:
   - [ ] Fedora
   - [ ] RHEL
