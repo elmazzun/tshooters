@@ -73,6 +73,8 @@ procs -----------memory---------- ---swap-- -----io---- -system-- -------cpu----
 
 ## TODO
 
+- [ ] add compiled binaries in an Ansible playbook which would inject such 
+      binaries in newly printed Linux machines?
 - [ ] `Dockerfile.compile` has way too many layers: reduce them
 - [ ] compile for more Linux distros:
   - [ ] Fedora
