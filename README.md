@@ -1,6 +1,6 @@
 # Troubleshooters
 
-**Statically compiled troubleshooting tools for Linux systems.**
+**Statically linked troubleshooting tools for Linux systems.**
 
 If you need to troubleshoot a Linux machine but you don't want to bring 
 troubleshooting tools in such machine by Docker or because your machine is 
@@ -24,7 +24,7 @@ are more chonky but at least they have everything they need inside them.
 
 ## Environments
 
-At the moment, troubleshooting tools are statically compiled in following distros:
+At the moment, troubleshooting tools are statically linked in following distros:
 
 - `Debian 12`;
 
@@ -59,8 +59,6 @@ tshooters-build-env   debian-12      083eae208fbf   33 minutes ago   551MB
 
 # Say you want to get vmstat for Ubuntu 22.04
 $ docker run -it --rm tshooters:ubuntu-22-04 bash
-# Once inside, you may see that a statically compiled binary is bigger than a 
-# few kilobytes, since it has everything it needs
 root@c3be227cc0ec:/binaries$ ls -lah vmstat 
 -rwxr-xr-x 1 root root 1.9M Jan  5 14:06 vmstat
 
